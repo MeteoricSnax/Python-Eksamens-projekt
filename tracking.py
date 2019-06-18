@@ -5,10 +5,10 @@ import cv2
 
 def track_circle(pts, frame, hsv, color_lower, color_upper):
     mask = cv2.inRange(hsv,color_lower,color_upper)
-    cnts = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts = imutils.grab_contours(cnts)
     center = None
-        # only proceed if at least one contour was found
+    # only proceed if at least one contour was found
     if len(cnts) > 0:
        # find the largest contour in the mask, then use it to compute the minimum enclosing circle.
         c = max(cnts, key=cv2.contourArea)
